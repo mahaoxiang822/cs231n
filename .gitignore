@@ -5,3 +5,5 @@
 
 # gitignore the built release.
 assignment3/*
+
+.idea/*

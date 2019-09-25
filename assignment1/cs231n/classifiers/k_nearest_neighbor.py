@@ -101,7 +101,8 @@ class KNearestNeighbor(object):
             # Do not use np.linalg.norm().                                        #
             #######################################################################
             # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-            dists[i, : ]= np.sqrt(np.sum(np.square(X[i]-self.X_train)))
+
+            dists[i, : ]= np.sqrt(np.sum(np.square(X[i]-self.X_train),axis=1))
 
             pass
 
@@ -132,7 +133,10 @@ class KNearestNeighbor(object):
         #       and two broadcast sums.                                         #
         #########################################################################
         # *****START OF YOUR CODE (DO NOT DELETE/MODIFY THIS LINE)*****
-        dists = np.sqrt(np.sum(np.square(X-self.X_train)))
+        X_square = np.sum(np.square(X),axis=1)
+        X_train_square = np.sum(np.square(self.X_train),axis=1)
+
+        dists = np.sqrt(X_square[:,np.newaxis]+X_train_square-2*X.dot(self.X_train.T))
 
         pass
 
